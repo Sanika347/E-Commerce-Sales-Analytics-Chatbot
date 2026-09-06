@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f4f7f6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.chat-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.chat-history {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.message {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.message.user {
+    background: #e1f5fe;
+    text-align: right;
+}
+
+.message.bot {
+    background: #f5f5f5;
+    text-align: left;
+}
+
+.error {
+    color: red;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #0288d1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0277bd;
+}
+
+.chart-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 10px 0;
+}
+
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: calc(50% - 10px);
+    box-sizing: border-box;
+}
+
+.card-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}

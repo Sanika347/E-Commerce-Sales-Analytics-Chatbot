@@ -1,0 +1,2 @@
+data/ecommerce.db filter=lfs diff=lfs merge=lfs -text
+data/olist_geolocation_dataset.csv filter=lfs diff=lfs merge=lfs -text
