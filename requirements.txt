@@ -1,0 +1,9 @@
+fastapi[all]
+pydantic
+pydantic-settings
+mcp
+google-genai
+pandas
+kaggle
+pytest
+pytest-asyncio
