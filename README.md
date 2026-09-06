@@ -136,7 +136,7 @@ Pinned dashboard items allow live updates via the `/api/dashboard/{id}/refresh` 
 
 Watch the complete project demo walkthrough:
 
-[![Demo Video Placeholder](https://drive.google.com/file/d/1JfYIrovoDoj4uonJA6zWY6lRU595CEEe/view?usp=sharing)
+[![Demo Video Placeholder](https://drive.google.com/file/d/1JfYIrovoDoj4uonJA6zWY6lRU595CEEe/view?usp=drive_link)
 
 *A video demonstration showing container startup, execution of all 5 demo queries, live dashboard pinning, chart refresh diff detection, and fallback agent execution.*
 
