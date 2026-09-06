@@ -1,7 +1,7 @@
 fastapi[all]
 pydantic
 pydantic-settings
-mcp
+mcp==1.9.4
 google-genai
 pandas
 kaggle
