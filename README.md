@@ -64,7 +64,7 @@ The system follows a modular, decoupled agent architecture:
 
 4. **Access the Chatbot**
    Open your browser and navigate to:
-   [http://localhost:8000](http://localhost:8000)
+   [http://localhost:8000](https://e-commerce-sales-analytics-chatbot.onrender.com/)
 
 ---
 
@@ -136,7 +136,7 @@ Pinned dashboard items allow live updates via the `/api/dashboard/{id}/refresh` 
 
 Watch the complete project demo walkthrough:
 
-[![Demo Video Placeholder](https://img.shields.io/badge/Demo_Video-Watch_Walkthrough-blue?style=for-the-badge&logo=youtube)](https://github.com/Sanika347/E-Commerce-Sales-Analytics-Chatbot#demo-walkthrough)
+[![Demo Video Placeholder](https://drive.google.com/file/d/1JfYIrovoDoj4uonJA6zWY6lRU595CEEe/view?usp=sharing)
 
 *A video demonstration showing container startup, execution of all 5 demo queries, live dashboard pinning, chart refresh diff detection, and fallback agent execution.*
 
