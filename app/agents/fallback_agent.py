@@ -1,11 +1,16 @@
 import json
 import re
+import logging
 from typing import Any, Dict, List, Optional, Tuple
 
 from app.agents.base import ILLMAgent
 from app.agents.mcp_client import MCPClientHelper
+from app.agents.validator import validate_user_intent
 from app.engine.insight_gen import generate_insight_fallback
 from app.engine.chart_selector import determine_chart_type
+
+logger = logging.getLogger("analytics_chatbot")
+
 
 
 class FallbackAgent(ILLMAgent):
@@ -162,16 +167,16 @@ class FallbackAgent(ILLMAgent):
         query = self._normalize_query(original_query)
 
         # ------------------------------------------------------------
-        # 1. Parameters
+        # 1. Intent Validation
         # ------------------------------------------------------------
 
-        parameters = self._extract_parameters(query)
+        is_valid, validated_intent, confidence = validate_user_intent(original_query)
 
         # ------------------------------------------------------------
         # 2. Intent
         # ------------------------------------------------------------
 
-         intent = self._detect_intent(query)
+        intent = self._detect_intent(query)
         if not is_valid:
             intent = "unsupported"
 
@@ -187,9 +192,14 @@ class FallbackAgent(ILLMAgent):
                 "unsupported_intent"
             )
 
+        # ------------------------------------------------------------
+        # 3. Parameters
+        # ------------------------------------------------------------
+
+        parameters = self._extract_parameters(query)
 
         # ------------------------------------------------------------
-        # 3. MCP requests
+        # 4. MCP requests
         # ------------------------------------------------------------
 
         tool_requests = self._build_tool_requests(
@@ -199,8 +209,8 @@ class FallbackAgent(ILLMAgent):
 
         if not tool_requests:
             return self._error_response(
-                "No MCP tool request could be created.",
-                "no_tool_request",
+                f"I couldn't identify a supported analytics request from '{original_query}'. Please ask a question about revenue, orders, categories, payments, reviews, sellers, or delivery performance.",
+                "unsupported_intent",
             )
 
         # ------------------------------------------------------------
@@ -1961,10 +1971,17 @@ class FallbackAgent(ILLMAgent):
             return "state_metric_comparison"
 
         # ------------------------------------------------------------
-        # Default
+        # Order Trends
         # ------------------------------------------------------------
 
-        return "order_trends"
+        if re.search(
+            r"\brevenue\b|\bsales\b|\borders?\b|\btrend(s)?\b|\bmonthly\b|\byearly\b|\bvolume\b|\b201[6-8]\b|\blast year\b|\bfirst half\b|\bsecond half\b",
+            query,
+            re.IGNORECASE,
+        ):
+            return "order_trends"
+
+        return "unsupported"
 
     # ================================================================
     # MCP REQUEST BUILDER
@@ -1996,6 +2013,9 @@ class FallbackAgent(ILLMAgent):
     ) -> List[
         Tuple[str, Dict[str, Any]]
     ]:
+
+        if intent == "unsupported":
+            return []
 
         date_args = self._date_arguments(
             parameters
