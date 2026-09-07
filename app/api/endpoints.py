@@ -38,9 +38,19 @@ async def query_endpoint(req: QueryRequest):
     agent = get_agent()
     result = await agent.query(req.question)
     
+    # Final Response Validation
     if "error" in result:
-        # Return HTTP 200 with error details as requested by standard JSON error handling
         return {"error": result["error"], "type": result.get("type", "general")}
+        
+    chart_config = result.get("chart_config")
+    raw_data = result.get("raw_data")
+    
+    if chart_config:
+        if not isinstance(chart_config, dict) or "type" not in chart_config or "data" not in chart_config:
+            return {"error": "Invalid chart configuration generated.", "type": "validation_error"}
+            
+    if raw_data is not None and not raw_data:
+        return {"error": "No data returned for your query.", "type": "empty"}
         
     return result
 
