@@ -64,7 +64,7 @@ The system follows a modular, decoupled agent architecture:
 
 4. **Access the Chatbot**
    Open your browser and navigate to:
-   [http://localhost:8000](https://e-commerce-sales-analytics-chatbot.onrender.com/)
+   [http://localhost:8000](https://e-commerce-sales-analytics-chatbot.onrender.com)
 
 ---
 
