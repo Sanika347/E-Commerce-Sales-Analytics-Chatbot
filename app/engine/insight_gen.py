@@ -109,4 +109,7 @@ def generate_insight_fallback(data: list[dict], user_query: str) -> str:
             share_str = f" ({top_share}%)" if top_share else ""
             return f"The most common payment method is {top_pt}{share_str}."
 
-    return f"Here is the data you requested for: '{user_query}'"
+        if data and isinstance(data, list) and len(data) > 0:
+            return f"Analyzed {len(data)} records for the requested metric."
+
+    return "No data available."
